@@ -1,0 +1,13 @@
+{
+  "v": "2",
+  "ps": "SRVpn-Free-7Days",
+  "add": "yourserver.com",
+  "port": "443",
+  "id": "uuid-here",
+  "aid": "0",
+  "net": "ws",
+  "type": "none",
+  "host": "",
+  "path": "/free",
+  "tls": "tls"
+}

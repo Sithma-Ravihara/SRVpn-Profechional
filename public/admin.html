@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SRVpn Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body {
+  font-family: sans-serif;
+  background: #111;
+  color: white;
+  padding: 20px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #00ff88;
+  background: #000;
+  color: white;
+}
+
+button {
+  padding: 10px 20px;
+  background: #00ff88;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #00ffaa;
+}
+
+#status {
+  margin-top: 15px;
+  color: #00ff88;
+}
+</style>
+</head>
+<body>
+
+<h1 class="text-2xl font-bold mb-6 text-green-400">SRVpn Admin Panel</h1>
+
+<label>YouTube Code</label>
+<textarea id="youtube"></textarea>
+
+<label>TikTok Code</label>
+<textarea id="tiktok"></textarea>
+
+<label>Zoom Code</label>
+<textarea id="zoom"></textarea>
+
+<label>WhatsApp Code</label>
+<textarea id="whatsapp"></textarea>
+
+<button onclick="updateCodes()">Update Codes</button>
+
+<p id="status"></p>
+
+<script>
+function loadCodes() {
+  fetch('/api/codes')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('youtube').value = data.youtube || '';
+      document.getElementById('tiktok').value = data.tiktok || '';
+      document.getElementById('zoom').value = data.zoom || '';
+      document.getElementById('whatsapp').value = data.whatsapp || '';
+    })
+    .catch(err => {
+      console.error('Error loading codes:', err);
+      document.getElementById('status').innerText = 'Failed to load codes.';
+    });
+}
+
+function updateCodes() {
+  const payload = {
+    youtube: document.getElementById('youtube').value,
+    tiktok: document.getElementById('tiktok').value,
+    zoom: document.getElementById('zoom').value,
+    whatsapp: document.getElementById('whatsapp').value
+  };
+
+  fetch('/api/update', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.status === 'success') {
+      document.getElementById('status').innerText = 'Codes updated successfully!';
+    } else {
+      document.getElementById('status').innerText = 'Failed to update codes.';
+    }
+  })
+  .catch(err => {
+    console.error('Error updating codes:', err);
+    document.getElementById('status').innerText = 'Error updating codes.';
+  });
+}
+
+// Load codes on page load
+loadCodes();
+
+
+
+
+
+const PASSWORD = "SRWu2243699";
+
+let pass = prompt("Enter Admin Password:");
+if(pass !== PASSWORD){
+  alert("Wrong password! Access denied.");
+  window.location.href = "/";
+}
+
+
+
+
+</script>
+
+</body>
+</html>

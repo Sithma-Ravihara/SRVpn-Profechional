@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<title>SRVpn Free V2Ray</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+
+body{
+background:linear-gradient(135deg,#000000,#001a12);
+color:white;
+font-family:sans-serif;
+}
+
+.card{
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(15px);
+border:1px solid rgba(0,255,150,0.2);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 25px rgba(0,255,150,0.4);
+}
+
+textarea{
+background:#111;
+border:1px solid #0f0;
+}
+
+</style>
+
+</head>
+
+<body class="p-10">
+
+<h1 class="text-4xl text-green-400 mb-10 text-center">
+SRVpn Free V2Ray Codes
+</h1>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
+
+<!-- YouTube -->
+<div class="card p-6 rounded-xl">
+
+<h2 class="text-xl text-green-400 mb-3">
+YouTube
+</h2>
+
+<textarea id="youtube" class="w-full h-24 p-2 rounded mb-3"></textarea>
+
+<div class="flex gap-3 mb-4">
+
+<button onclick="copyCode('youtube')" class="bg-green-500 px-4 py-2 rounded">
+Copy
+</button>
+
+<button onclick="makeQR('youtube','qr1')" class="bg-blue-500 px-4 py-2 rounded">
+QR Code
+</button>
+
+</div>
+
+<div id="qr1"></div>
+
+</div>
+
+
+<!-- TikTok -->
+<div class="card p-6 rounded-xl">
+
+<h2 class="text-xl text-green-400 mb-3">
+TikTok
+</h2>
+
+<textarea id="tiktok" class="w-full h-24 p-2 rounded mb-3"></textarea>
+
+<div class="flex gap-3 mb-4">
+
+<button onclick="copyCode('tiktok')" class="bg-green-500 px-4 py-2 rounded">
+Copy
+</button>
+
+<button onclick="makeQR('tiktok','qr2')" class="bg-blue-500 px-4 py-2 rounded">
+QR Code
+</button>
+
+</div>
+
+<div id="qr2"></div>
+
+</div>
+
+
+<!-- Zoom -->
+<div class="card p-6 rounded-xl">
+
+<h2 class="text-xl text-green-400 mb-3">
+Zoom
+</h2>
+
+<textarea id="zoom" class="w-full h-24 p-2 rounded mb-3"></textarea>
+
+<div class="flex gap-3 mb-4">
+
+<button onclick="copyCode('zoom')" class="bg-green-500 px-4 py-2 rounded">
+Copy
+</button>
+
+<button onclick="makeQR('zoom','qr3')" class="bg-blue-500 px-4 py-2 rounded">
+QR Code
+</button>
+
+</div>
+
+<div id="qr3"></div>
+
+</div>
+
+
+<!-- WhatsApp -->
+<div class="card p-6 rounded-xl">
+
+<h2 class="text-xl text-green-400 mb-3">
+WhatsApp
+</h2>
+
+<textarea id="whatsapp" class="w-full h-24 p-2 rounded mb-3"></textarea>
+
+<div class="flex gap-3 mb-4">
+
+<button onclick="copyCode('whatsapp')" class="bg-green-500 px-4 py-2 rounded">
+Copy
+</button>
+
+<button onclick="makeQR('whatsapp','qr4')" class="bg-blue-500 px-4 py-2 rounded">
+QR Code
+</button>
+
+</div>
+
+<div id="qr4"></div>
+
+</div>
+
+</div>
+
+
+<!-- Online Users -->
+<div id="userCount" class="text-green-400 font-bold mt-10 text-center">
+Online Users: 0
+</div>
+
+
+<!-- ADS -->
+<div style="margin:20px auto; text-align:center;">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-XXXXXXX"
+     data-ad-slot="XXXXXXX"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+
+<script>
+
+//// LOAD CODES FROM SERVER
+
+fetch("/api/codes")
+.then(res => res.json())
+.then(data => {
+
+document.getElementById("youtube").value = data.youtube || ""
+document.getElementById("tiktok").value = data.tiktok || ""
+document.getElementById("zoom").value = data.zoom || ""
+document.getElementById("whatsapp").value = data.whatsapp || ""
+
+})
+.catch(err => console.log("Codes load error", err))
+
+
+
+//// COPY FUNCTION
+
+function copyCode(id){
+
+let el = document.getElementById(id)
+
+if(!el.value){
+alert("No Code Found")
+return
+}
+
+navigator.clipboard.writeText(el.value)
+.then(()=>alert("Copied!"))
+.catch(()=>alert("Copy failed"))
+
+}
+
+
+
+//// QR GENERATOR
+
+function makeQR(id,qr){
+
+let code = document.getElementById(id).value
+
+if(!code){
+alert("No Code Available")
+return
+}
+
+document.getElementById(qr).innerHTML=""
+
+new QRCode(document.getElementById(qr),{
+text:code,
+width:180,
+height:180
+})
+
+}
+
+
+
+//// ONLINE USERS
+
+function updateUsers(){
+
+fetch("/api/users")
+.then(res=>res.json())
+.then(data=>{
+document.getElementById("userCount").innerText =
+"Online Users: " + data.users
+})
+.catch(()=>{})
+
+}
+
+setInterval(updateUsers,3000)
+
+updateUsers()
+
+</script>
+
+
+</body>
+</html>
