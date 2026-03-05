@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SRVpn Free V2Ray</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+body{
+background:#0f172a;
+color:white;
+font-family:Arial;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.1);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+</style>
+
+</head>
+<body>
+
+<!-- Navbar -->
+
+<div class="flex justify-between items-center p-5 bg-black">
+
+<h1 class="text-2xl font-bold text-green-400">SRVpn Free</h1>
+
+<a href="index.html" class="text-white hover:text-green-400">
+Back Home
+</a>
+
+</div>
+
+
+<!-- Title -->
+
+<div class="text-center mt-10">
+
+<h2 class="text-4xl font-bold text-green-400">
+Free V2Ray Codes
+</h2>
+
+<p class="text-gray-400 mt-2">
+Free trial codes (7 Days / Limited Speed)
+</p>
+
+</div>
+
+
+<!-- Cards -->
+
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 p-10">
+
+
+<!-- YouTube -->
+
+<div class="card p-6 rounded-xl">
+
+<h3 class="text-xl font-bold text-red-400 mb-3">
+YouTube
+</h3>
+
+<textarea id="yt"
+class="w-full h-28 bg-black p-3 rounded text-green-400">
+
+vless://youtube-server-code-example
+
+</textarea>
+
+<button onclick="copyCode('yt')"
+class="mt-4 w-full bg-green-500 hover:bg-green-600 py-2 rounded">
+
+Copy Code
+
+</button>
+
+</div>
+
+
+
+<!-- TikTok -->
+
+<div class="card p-6 rounded-xl">
+
+<h3 class="text-xl font-bold text-pink-400 mb-3">
+TikTok
+</h3>
+
+<textarea id="tiktok"
+class="w-full h-28 bg-black p-3 rounded text-green-400">
+
+vless://tiktok-server-code-example
+
+</textarea>
+
+<button onclick="copyCode('tiktok')"
+class="mt-4 w-full bg-green-500 hover:bg-green-600 py-2 rounded">
+
+Copy Code
+
+</button>
+
+</div>
+
+
+
+<!-- Zoom -->
+
+<div class="card p-6 rounded-xl">
+
+<h3 class="text-xl font-bold text-blue-400 mb-3">
+Zoom
+</h3>
+
+<textarea id="zoom"
+class="w-full h-28 bg-black p-3 rounded text-green-400">
+
+vless://zoom-server-code-example
+
+</textarea>
+
+<button onclick="copyCode('zoom')"
+class="mt-4 w-full bg-green-500 hover:bg-green-600 py-2 rounded">
+
+Copy Code
+
+</button>
+
+</div>
+
+
+
+<!-- WhatsApp -->
+
+<div class="card p-6 rounded-xl">
+
+<h3 class="text-xl font-bold text-green-400 mb-3">
+WhatsApp
+</h3>
+
+<textarea id="wa"
+class="w-full h-28 bg-black p-3 rounded text-green-400">
+
+vless://whatsapp-server-code-example
+
+</textarea>
+
+<button onclick="copyCode('wa')"
+class="mt-4 w-full bg-green-500 hover:bg-green-600 py-2 rounded">
+
+Copy Code
+
+</button>
+
+</div>
+
+
+</div>
+
+
+
+<!-- JS COPY FUNCTION -->
+
+<script>
+
+function copyCode(id){
+
+var copyText = document.getElementById(id);
+
+copyText.select();
+
+copyText.setSelectionRange(0, 99999);
+
+navigator.clipboard.writeText(copyText.value);
+
+alert("V2Ray Code Copied!");
+
+}
+
+</script>
+
+
+</body>
+</html>
